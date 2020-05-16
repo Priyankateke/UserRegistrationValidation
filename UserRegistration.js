@@ -1,23 +1,40 @@
-var validation = require('./Validation');
+ const prompt = require('prompt');
 
-//Regex pattern for first name
-let firstNamePattern = "^[A-Z]{1}[a-z]{2,}$"
+ /**
+  * Properties
+  */
+ const properties = [
+     /**
+      * User FirstName
+      */
+    {
+        name: 'firstName',
+        validator: /^[A-Z]{1}[a-z]{2,}$/,
+        warning: 'Firstname must be only letters, First letter should be capital'
+    },
+    {
+        name: 'lastName',
+        validator: /^[A-Z]{1}[a-z]{2,}$/,
+        warning: 'LastName must be only letters, First letter should be capital'
+    }
+];
 
-let name="Priyanka"
+//Start prompt
+prompt.start();
 
-//readline built in module
-const readline = require('readline');
-const rl = readline.createInterface({input : process.stdin,
-                                    output : process.stdout});
-//take user first name
-rl.question("Enter first name : ",function(name){
-    var msg ="";
-
-    if(validation.validateName(name, firstNamePattern))
-        msg = "Valid Name"
-    else
-        msg= "Invalid Name"
-
-    console.log(msg)
-    process.exit();
+/**
+ * If invalid input then display error 
+ * If valid input then receive input
+ */
+prompt.get(properties, function (err, result) {
+    if (err) { return onErr(err); }
+    console.log('Command-line input received:');
+    console.log('  Username: ' + result.firstName);
+    console.log('  Password: ' + result.lastName);
 });
+
+function onErr(err) {
+    console.log(err);
+    return 1;
+}
+
