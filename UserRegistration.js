@@ -4,9 +4,6 @@
   * Properties
   */
  const properties = [
-     /**
-      * User FirstName
-      */
     {
         name: 'firstName',
         validator: /^[A-Z]{1}[a-z]{2,}$/,
@@ -21,6 +18,11 @@
         name: 'emailId',
         validator: /^[0-9a-zA-Z]+([.+_-]?[0-9a-zA-Z]+)*([@][0-9a-zA-Z]+){1}([.][a-zA-Z]{2,3}){1,2}$/,
         warning: 'Email id must be in valid format'
+    },
+    {
+        name: 'mobileNo',
+        validator: /^[0-9]{1,3}[' '][0-9]{10}$/,
+        warning: 'Mobile Number must be only numbers, first 2 digit then space and 10 digits'
     }
 ];
 
@@ -36,7 +38,8 @@ prompt.get(properties, function (err, result) {
     console.log('Command-line input received:');
     console.log('  First Name: ' + result.firstName);
     console.log('  Last Name: ' + result.lastName);
-    console.log('  Email Id: ' + result.emailId)
+    console.log('  Email Id: ' + result.emailId);
+    console.log('  Mobile No: ' + result.mobileNo);
 });
 
 function onErr(err) {
